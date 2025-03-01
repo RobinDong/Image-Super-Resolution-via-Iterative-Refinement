@@ -1,5 +1,5 @@
 {
-    "name": "sr_ffhq",
+    "name": "sr_bird",
     "phase": "train", // train or val
     "gpu_ids": [
         0
@@ -9,30 +9,29 @@
         "tb_logger": "tb_logger",
         "results": "results",
         "checkpoint": "checkpoint",
-        "resume_state": null
-        // "resume_state": "experiments/sr_ffhq_210806_204158/checkpoint/I640000_E37" //pretrain model or training state
+        "resume_state": "experiments/sr_bird_250225_154410/checkpoint/I1000000_E1231"
     },
     "datasets": {
         "train": {
-            "name": "FFHQ",
+            "name": "train_bird",
             "mode": "HR", // whether need LR img
-            "dataroot": "dataset/ffhq_16_128",
-            "datatype": "lmdb", //lmdb or img, path of img files
+            "dataroot": "ugc_16_128/",
+            "datatype": "img", //lmdb or img, path of img files
             "l_resolution": 16, // low resolution need to super_resolution
             "r_resolution": 128, // high resolution
-            "batch_size": 4,
+            "batch_size": 32,
             "num_workers": 8,
             "use_shuffle": true,
             "data_len": -1 // -1 represents all data used in train
         },
         "val": {
-            "name": "CelebaHQ",
+            "name": "val_bird",
             "mode": "LRHR",
-            "dataroot": "dataset/celebahq_16_128",
-            "datatype": "lmdb", //lmdb or img, path of img files
+            "dataroot": "0123_16_128/",
+            "datatype": "img", //lmdb or img, path of img files
             "l_resolution": 16,
             "r_resolution": 128,
-            "data_len": 50 // data length in validation 
+            "data_len": 100 // data length in validation 
         }
     },
     "model": {
@@ -77,9 +76,9 @@
     },
     "train": {
         "n_iter": 1000000,
-        "val_freq": 1e4,
-        "save_checkpoint_freq": 1e4,
-        "print_freq": 200,
+        "val_freq": 1e5,
+        "save_checkpoint_freq": 1e5,
+        "print_freq": 1e4,
         "optimizer": {
             "type": "adam",
             "lr": 1e-4
